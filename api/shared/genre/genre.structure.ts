@@ -23,12 +23,12 @@ export const GenreStructure: IScopeGenreStructure[] = [
     subtypes: [
       {
         id: Genre.Volleyball,
-        label: 'Volleyball'
+        label: 'Volleyball',
       },
       {
         id: Genre.Football,
-        label: 'Football'
+        label: 'Football',
       },
-    ]
+    ],
   },
-]
+];

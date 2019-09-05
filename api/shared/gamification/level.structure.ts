@@ -15,22 +15,22 @@ export interface ILevelStructure {
 export const LevelStructure: ILevelStructure[] = [
   {
     id: Level.Newbie,
-    label: 'Newbie'
+    label: 'Newbie',
   },
   {
     id: Level.Regular,
-    label: 'Regular'
+    label: 'Regular',
   },
   {
     id: Level.Pro,
-    label: 'Pro'
+    label: 'Pro',
   },
   {
     id: Level.Lord,
-    label: 'Lord'
+    label: 'Lord',
   },
   {
     id: Level.King,
-    label: 'King'
+    label: 'King',
   },
-]
+];

@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from '../auth/auth.module';
 import { ExpensesModule } from '../expenses/expenses.module';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ExpensesModule } from '../expenses/expenses.module';
       typePaths: ['./**/*.graphql'],
       path: process.env.IS_SEPARATE ? '/api/graphql' : '/graphql',
     }),
+    // DatabaseModule,
     AuthModule,
     ExpensesModule,
   ],

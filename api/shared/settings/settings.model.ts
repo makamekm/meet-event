@@ -1,9 +1,9 @@
 import { IUserModel } from '../auth/user.model';
 
 export interface ISettingsModel {
-  administrators: IUserModel;
+  administrators: IUserModel[];
   genres_sore_multiplex: {
     [genre: number]: number;
   };
-  bannedUsers: IUserModel[];
+  banned_users: IUserModel[];
 }

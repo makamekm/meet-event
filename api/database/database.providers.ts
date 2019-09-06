@@ -19,7 +19,7 @@ export const databaseProviders = [
     provide: 'DATABASE_CONNECTION',
     useFactory: async () => await createConnection({
       type: 'sqlite',
-      database: './test.db',
+      database: ':memory:',
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
       ],

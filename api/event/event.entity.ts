@@ -63,8 +63,8 @@ export class EventEntity implements IEventModel {
   @OneToOne(() => EventScoreEntity, score => score.event)
   score: EventScoreEntity;
 
-  @Field()
-  @Column('enum', { array: true })
+  @Field(() => [Int])
+  @Column('int', { array: true })
   genres: Genre[] = [];
 
   @ManyToOne(() => EventScoreEntity)

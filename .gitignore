@@ -64,4 +64,5 @@ typings/
 tslint-report.json
 sonar-report.xml
 sw.*
+test.db
 __diff_output__

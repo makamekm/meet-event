@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
 
 export const databaseProviders = [
-  {
+  process.env.NODE_ENV === 'production' ? {
     provide: 'DATABASE_CONNECTION',
     useFactory: async () => await createConnection({
       type: 'postgres',
@@ -10,6 +10,16 @@ export const databaseProviders = [
       username: 'root',
       password: 'root',
       database: 'test',
+      entities: [
+        __dirname + '/../**/*.entity{.ts,.js}',
+      ],
+      synchronize: true,
+    }),
+  } : {
+    provide: 'DATABASE_CONNECTION',
+    useFactory: async () => await createConnection({
+      type: 'sqlite',
+      database: './test.db',
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
       ],

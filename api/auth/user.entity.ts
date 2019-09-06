@@ -54,7 +54,7 @@ export class UserEntity implements IUserModel {
   updated_at?: Date;
 
   @Field(() => [Int])
-  @Column('enum', { array: true })
+  @Column('int', { array: true })
   recommend_genres: Genre[] = [];
 
   @Field(() => ScoreEntity)

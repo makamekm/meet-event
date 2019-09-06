@@ -13,7 +13,7 @@ import { DatabaseModule } from '../database/database.module';
       typePaths: ['./**/*.graphql'],
       path: process.env.IS_SEPARATE ? '/api/graphql' : '/graphql',
     }),
-    // DatabaseModule,
+    DatabaseModule,
     AuthModule,
     ExpensesModule,
   ],

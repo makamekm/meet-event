@@ -10,7 +10,8 @@
     "node": "~10.15.3"
   },
   "scripts": {
-    "dev": "IS_SEPARATE=true run-p dev:ui dev:api dev:gql",
+    "dev": "IS_SEPARATE=true run-p dev:ui dev:mt",
+    "dev:mt": "IS_SEPARATE=true run-p dev:api dev:gql",
     "dev:ui": "nuxt",
     "dev:gql": "ts-node-dev --project ./tsconfig.express.json generate-typings",
     "start": "NODE_ENV=production HOST=0.0.0.0 nuxt start",
@@ -20,13 +21,13 @@
     "lint": "vue-tslint -c tslint.json",
     "lint:fix": "vue-tslint -c tslint.json --fix",
     "lint:report": "tslint -t json -o tslint-report.json --project . --force",
-    "test": "JEST_PROJECT=unit,int,e2e jest --coverage",
-    "test:simple": "JEST_PROJECT=unit,int jest",
-    "test:p2p": "JEST_PROJECT=p2p jest",
-    "test:all": "JEST_PROJECT=unit,int,e2e,p2p jest",
+    "test": "JEST_PROJECT=unit,int,e2e jest --coverage --testTimeout 60000",
+    "test:simple": "JEST_PROJECT=unit,int jest --testTimeout 60000",
+    "test:p2p": "JEST_PROJECT=p2p jest --testTimeout 60000",
+    "test:all": "JEST_PROJECT=unit,int,e2e,p2p jest --testTimeout 60000",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:debug": "node --inspect-brk -r ts-node/register node_modules/.bin/jest --runInBand --testTimeout 60000",
     "verify:slow": "run-p build lint test",
     "verify:fast": "run-p lint:fix test:simple"
   },
@@ -104,6 +105,7 @@
     "get-port": "5.0.0",
     "ts-node-dev": "1.0.0-pre.39",
     "husky": "3.0.4",
-    "jest-sonar": "0.2.2"
+    "jest-sonar": "0.2.2",
+    "sqlite": "3.0.3"
   }
 }

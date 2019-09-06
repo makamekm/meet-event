@@ -13,7 +13,7 @@ export class CommentRatingEntity {
   @ManyToOne(() => CommentEntity)
   comment: CommentEntity;
 
-  @Field(() => [])
+  @Field(() => UserEntity)
   @ManyToOne(() => UserEntity)
   author: UserEntity;
 

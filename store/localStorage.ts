@@ -1,9 +1,9 @@
 import { StoreOptions } from 'vuex';
-import { Expenses } from '~/api/shared/graphql';
+// import { Expenses } from '~/api/shared/graphql';
 
 export interface LocalStorageState {
   [x: string]: any;
-  expenses: Expenses[];
+  expenses: any[];
 }
 
 const store: StoreOptions<LocalStorageState> = {

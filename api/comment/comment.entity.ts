@@ -24,7 +24,7 @@ export class CommentEntity implements ICommentModel {
   @ManyToOne(() => EventEntity, event => event.comments)
   event: EventEntity;
 
-  @Field(() => [])
+  @Field(() => UserEntity)
   @ManyToOne(() => UserEntity)
   author: UserEntity;
 

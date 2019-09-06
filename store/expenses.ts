@@ -1,10 +1,10 @@
 import { StoreOptions } from 'vuex';
 import Sifter from 'sifter';
-import { Expenses } from '~/api/shared/graphql';
+// import { Expenses } from '~/api/shared/graphql';
 
 export interface ExpensesState {
   [x: string]: any;
-  items: Expenses[];
+  items: any[];
   search: string;
   sortBy: string;
   sortByDescending: boolean;

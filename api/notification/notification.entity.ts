@@ -21,7 +21,7 @@ export class NotificationEntity implements INotificationModel {
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @Column({ default: false })
   seen: boolean = false;

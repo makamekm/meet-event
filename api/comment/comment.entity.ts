@@ -2,6 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import { Field, Int, ObjectType } from 'type-graphql';
 import { ICommentModel } from '../shared/comment/comment.model';
 import { UserEntity } from '../auth/user.entity';
+import { EventEntity } from '../event/event.entity';
 
 @ObjectType()
 @Entity()
@@ -19,6 +20,10 @@ export class CommentEntity implements ICommentModel {
   @TreeParent()
   parent?: CommentEntity;
 
+  @Field(() => EventEntity)
+  @ManyToOne(() => EventEntity, event => event.comments)
+  event: EventEntity;
+
   @Field(() => [])
   @ManyToOne(() => UserEntity)
   author: UserEntity;
@@ -29,7 +34,7 @@ export class CommentEntity implements ICommentModel {
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @Field({ nullable: true })
   @UpdateDateColumn()

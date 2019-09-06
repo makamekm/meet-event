@@ -19,7 +19,7 @@ export class CommentRatingEntity {
 
   @Field()
   @CreateDateColumn()
-  created_at: Date;
+  created_at?: Date;
 
   @Field({ nullable: true })
   @UpdateDateColumn()

@@ -6,4 +6,6 @@ export interface IEventUserModel {
   type: EventUser;
   user: IUserModel;
   proved: boolean;
+  created_at?: Date;
+  updated_at?: Date;
 }

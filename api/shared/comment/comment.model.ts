@@ -7,7 +7,7 @@ export interface ICommentModel {
   banned: boolean;
   comments: ICommentModel[];
   parent?: ICommentModel;
-  created_at: Date;
+  created_at?: Date;
   updated_at?: Date;
   rating: number;
 }

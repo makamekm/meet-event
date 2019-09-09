@@ -5,9 +5,12 @@ import { AuthController } from './auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
 import { UserQuery } from './user.query';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './user.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([UserEntity]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secretOrPrivateKey: process.env.JWT_SECRET || 'dev_key',
@@ -18,6 +21,6 @@ import { UserQuery } from './user.query';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, UserQuery],
-  exports: [AuthService, JwtStrategy],
+  exports: [AuthService, JwtStrategy, TypeOrmModule],
 })
 export class AuthModule {}

@@ -8,7 +8,8 @@ export class AuthController {
 
   @Post('login')
   public async login(@Body() body) {
-    return await this.authService.login(body.username, body.password);
+    const userData = await this.authService.login(body.username, body.password);
+    return userData.serialized_user;
   }
 
   @Get('user')

@@ -121,8 +121,6 @@ export interface UserAddressEntity {
 export interface UserEntity {
     id: number;
     email: string;
-    username: string;
-    password: string;
     first_name: string;
     last_name: string;
     contact_information: string;

@@ -17,11 +17,6 @@ export class UserEntity implements IUserModel {
   @Column({ default: '' })
   email: string = '';
 
-  @Field()
-  @Column({ default: '' })
-  username: string = '';
-
-  @Field()
   @Column({ default: '' })
   password: string = '';
 

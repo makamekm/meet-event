@@ -124,8 +124,6 @@ type UserAddressEntity {
 type UserEntity {
   id: Int!
   email: String!
-  username: String!
-  password: String!
   first_name: String!
   last_name: String!
   contact_information: String!

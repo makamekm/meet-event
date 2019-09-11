@@ -4,4 +4,5 @@ export interface IUserAddressModel {
   city: string;
   latitude: number;
   longitude: number;
+  primary: boolean;
 }

@@ -33,11 +33,12 @@ export class UserEntity implements IUserModel {
   contact_information: string = '';
 
   @Field(() => UserAddressEntity)
-  @OneToOne(() => UserAddressEntity)
-  address: UserAddressEntity;
+  get address() {
+    return this.addresses.find(a => a.primary === true);
+  }
 
   @Field(() => [UserAddressEntity])
-  @ManyToOne(() => UserAddressEntity, address => address.user)
+  @OneToMany(() => UserAddressEntity, address => address.user, { eager: true })
   addresses: UserAddressEntity[];
 
   @Field()
@@ -49,7 +50,7 @@ export class UserEntity implements IUserModel {
   updated_at?: Date;
 
   @Field(() => [Int])
-  @Column('int', { array: true })
+  @Column('simple-array')
   recommend_genres: Genre[] = [];
 
   @Field(() => ScoreEntity)

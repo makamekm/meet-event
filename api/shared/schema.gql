@@ -119,6 +119,7 @@ type UserAddressEntity {
   city: String!
   latitude: Int!
   longitude: Int!
+  primary: Boolean!
 }
 
 type UserEntity {

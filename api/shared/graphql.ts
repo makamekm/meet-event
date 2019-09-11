@@ -116,6 +116,7 @@ export interface UserAddressEntity {
     city: string;
     latitude: number;
     longitude: number;
+    primary: boolean;
 }
 
 export interface UserEntity {

@@ -11,6 +11,14 @@ export const databaseProviders: ConnectionOptions = process.env.NODE_ENV === 'pr
     __dirname + '/../**/*.entity{.ts,.js}',
   ],
   synchronize: true,
+  migrations: [
+    __dirname + '/../**/*.seed.ts',
+    __dirname + '/../migration/*.js',
+  ],
+  migrationsRun: true,
+  cli: {
+    migrationsDir: __dirname + '/../migration',
+  },
 } : {
   type: 'sqlite',
   database: ':memory:',
@@ -18,8 +26,11 @@ export const databaseProviders: ConnectionOptions = process.env.NODE_ENV === 'pr
     __dirname + '/../**/*.entity{.ts,.js}',
   ],
   synchronize: true,
-  // migrations: [
-  //   '/../**/*.seeds.ts'
-  // ],
-  // migrationsRun: true,
+  migrations: [
+    __dirname + '/../**/*.dev-seed.ts',
+  ],
+  migrationsRun: true,
+  cli: {
+    migrationsDir: __dirname + '/../migration',
+  },
 };

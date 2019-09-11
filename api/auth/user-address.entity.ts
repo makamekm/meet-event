@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany, ManyToOne } from 'typeorm';
 import { IUserAddressModel } from '../shared/auth/user-address.model';
 import { ObjectType, Field, Int } from 'type-graphql';
 import { UserEntity } from './user.entity';
@@ -26,6 +26,10 @@ export class UserAddressEntity implements IUserAddressModel {
   @Column({ default: 0 })
   longitude: number = 0;
 
-  @OneToMany(type => UserEntity, user => user.addresses)
-  user: UserEntity[];
+  @ManyToOne(type => UserEntity, user => user.addresses, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  user: UserEntity;
+
+  @Field()
+  @Column({ default: false })
+  primary: boolean = false;
 }

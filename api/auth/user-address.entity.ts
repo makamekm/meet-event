@@ -6,7 +6,7 @@ import { UserEntity } from './user.entity';
 @ObjectType()
 @Entity()
 export class UserAddressEntity implements IUserAddressModel {
-  @Field(type => Int)
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id?: number;
 
@@ -18,15 +18,15 @@ export class UserAddressEntity implements IUserAddressModel {
   @Column({ default: '' })
   city: string = '';
 
-  @Field(type => Int)
+  @Field(() => Int)
   @Column({ default: 0 })
   latitude: number = 0;
 
-  @Field(type => Int)
+  @Field(() => Int)
   @Column({ default: 0 })
   longitude: number = 0;
 
-  @ManyToOne(type => UserEntity, user => user.addresses, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+  @ManyToOne(() => UserEntity, user => user.addresses, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   user: UserEntity;
 
   @Field()

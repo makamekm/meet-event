@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, CreateDateColumn, UpdateDateColumn, OneToOne, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { Field, Int, ObjectType } from 'type-graphql';
 import { UserAddressEntity } from './user-address.entity';
 import { IUserModel } from '../shared/auth/user.model';
@@ -54,7 +54,8 @@ export class UserEntity implements IUserModel {
   recommend_genres: Genre[] = [];
 
   @Field(() => ScoreEntity)
-  @OneToOne(() => ScoreEntity, score => score.user)
+  @OneToOne(() => ScoreEntity, score => score.user, { eager: true })
+  @JoinColumn()
   score: ScoreEntity;
 
   @Field(() => [CardEntity])

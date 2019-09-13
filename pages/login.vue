@@ -7,13 +7,13 @@
 
           <form method="post" @submit.prevent="login">
             <div class="field">
-              <label class="label on-appear-scale-left on-delay-1">Username</label>
+              <label class="label on-appear-scale-left on-delay-1">Email</label>
               <div class="control on-appear-scale-right on-delay-2">
                 <input
-                  type="username"
+                  type="email"
                   class="input"
-                  name="username"
-                  v-model="username"
+                  name="email"
+                  v-model="email"
                 >
               </div>
             </div>
@@ -65,7 +65,7 @@ const AuthStore = namespace('auth');
   },
   data() {
     return {
-      username: '',
+      email: '',
       password: '',
       error: null,
     };
@@ -76,14 +76,14 @@ export default class extends Vue {
   @AuthStore.Action('login') doLogin;
   @AuthStore.Action('loginGoogle') doLoginGoogle;
 
-  username!: string;
+  email!: string;
   password!: string;
   error!: string;
 
   async login() {
     try {
       await this.doLogin({
-        username: this.username,
+        email: this.email,
         password: this.password,
       });
       const redirect = this.$route.query.redirect as string;

@@ -18,15 +18,61 @@ export class SeedDevUser1568108033825 implements MigrationInterface {
       last_name: 'Developer',
       password: getPassword('dev'),
       contact_information: '',
-      addresses: [await getRepository(UserAddressEntity).save({
-        country: 'Russia',
-        latitude: 54.9179562,
-        longitude: 37.4229963,
-        primary: true,
-      })],
+      addresses: [
+        await getRepository(UserAddressEntity).save({
+          country: 'Russia',
+          latitude: 54.9179562,
+          longitude: 37.4229963,
+          primary: true,
+        }),
+      ],
       recommend_genres: [Genre.Football],
-      score: getRepository(ScoreEntity).create({
+      score: await getRepository(ScoreEntity).save({
         score: 0,
+      }),
+      cards: [],
+    });
+
+    await getRepository(UserEntity).save({
+      id: 1,
+      email: 'speaker@dev.com',
+      first_name: 'Local',
+      last_name: 'Speaker',
+      password: getPassword('dev'),
+      contact_information: '',
+      addresses: [
+        await getRepository(UserAddressEntity).save({
+          country: 'Russia',
+          latitude: 54.9179562,
+          longitude: 37.4229963,
+          primary: true,
+        }),
+      ],
+      recommend_genres: [Genre.Football, Genre.Volleyball],
+      score: await getRepository(ScoreEntity).save({
+        score: 100,
+      }),
+      cards: [],
+    });
+
+    await getRepository(UserEntity).save({
+      id: 2,
+      email: 'attender@dev.com',
+      first_name: 'Local',
+      last_name: 'Attender',
+      password: getPassword('dev'),
+      contact_information: '',
+      addresses: [
+        await getRepository(UserAddressEntity).save({
+          country: 'Russia',
+          latitude: 54.9179562,
+          longitude: 37.4229963,
+          primary: true,
+        }),
+      ],
+      recommend_genres: [Genre.Football, Genre.Volleyball],
+      score: await getRepository(ScoreEntity).save({
+        score: 15,
       }),
       cards: [],
     });

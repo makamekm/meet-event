@@ -4,7 +4,8 @@ import { getCookie, setCookie } from '~/utils/cookie';
 
 export interface User {
   id: number;
-  username: string;
+  first_name: string;
+  last_name: string;
   email: string;
   avatar: string;
 }
@@ -39,13 +40,12 @@ const store: StoreOptions<UserState> = {
         dispatch('setLoading', false);
       }
     },
-    async login({ commit }, { username, password }) {
+    async login({ commit }, { email, password }) {
       const { data } = await this.$axios.post(`/auth/login`, {
-        username, password,
+        email, password,
       });
 
-      const { token, ...user } = data;
-
+      const { token, user } = data;
       commit('setUser', user);
 
       if (process.client) {
@@ -62,12 +62,11 @@ const store: StoreOptions<UserState> = {
       }
       commit('setUser', null);
     },
-    async register({ dispatch }, { username, password }) {
+    async register({ dispatch }, { email, password }) {
       await this.$axios.post(`/auth/register`, {
-        username, password,
+        email, password,
       });
-
-      await dispatch('login', { username, password });
+      await dispatch('login', { email, password });
     },
   },
   mutations: {

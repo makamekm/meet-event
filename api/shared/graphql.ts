@@ -89,6 +89,11 @@ export interface EventUserEntity {
     updated_at?: DateTime;
 }
 
+export interface IMutation {
+    logout(): boolean | Promise<boolean>;
+    registration(password: string, email: string): boolean | Promise<boolean>;
+}
+
 export interface NotificationEntity {
     id: number;
     short_message: string;
@@ -100,6 +105,7 @@ export interface NotificationEntity {
 
 export interface IQuery {
     me(): UserEntity | Promise<UserEntity>;
+    login(password: string, email: string): UserEntity | Promise<UserEntity>;
 }
 
 export interface ScoreEntity {

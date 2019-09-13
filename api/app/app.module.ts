@@ -16,9 +16,14 @@ import { databaseProviders } from './database.providers';
   imports: [
     TypeOrmModule.forRoot(databaseProviders),
     GraphQLModule.forRoot({
-      playground: true,
       path: process.env.IS_SEPARATE ? '/api/graphql' : '/graphql',
       autoSchemaFile: 'api/shared/schema.gql',
+      context: ({ req, res }) => ({ req, res }),
+      playground: {
+        settings: {
+          'request.credentials': 'include',
+        },
+      },
     }),
     AuthModule,
     CardModule,

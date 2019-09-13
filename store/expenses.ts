@@ -65,26 +65,27 @@ const store: StoreOptions<ExpensesState> = {
       commit('setSortByDescending', sortByDescending);
     },
     async loadItems({ commit, rootState }) {
-      const { data: {data: {expenses}} } = await this.$axios.post(`/graphql`, {
-        query: `{
-          expenses {
-            id
-            date
-            amount
-            merchant
-            currency
-            categoryName
-            parentId
-            status {
-              stage
-            }
-          }
-        }`,
-      });
-      commit('setItems', expenses.map(e => ({
-        ...e,
-        approved: e.status.stage === 'Submitted',
-      })));
+      // const { data: {data: {expenses}} } = await this.$axios.post(`/graphql`, {
+      //   query: `{
+      //     expenses {
+      //       id
+      //       date
+      //       amount
+      //       merchant
+      //       currency
+      //       categoryName
+      //       parentId
+      //       status {
+      //         stage
+      //       }
+      //     }
+      //   }`,
+      // });
+      // commit('setItems', expenses.map(e => ({
+      //   ...e,
+      //   approved: e.status.stage === 'Submitted',
+      // })));
+      commit('setItems', []);
     },
   },
   mutations: {

@@ -1,27 +1,47 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Context, Mutation, Args } from '@nestjs/graphql';
 import { UserEntity } from './user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { CurrentUser } from './auth.decorator';
+import { GraphqlAuthGuard } from './auth.guard';
+import { UseGuards } from '@nestjs/common';
+import { Response } from 'express';
+import { AuthService } from './auth.service';
+
+const days = 365;
+const time = (days * 86400000);
 
 @Resolver()
 export class UserQuery {
-  constructor(
-    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Query(() => UserEntity)
-  async me(): Promise<UserEntity> {
-    const users = await this.userRepository.find({
-      // relations: ['addresses', 'score'],
-      // join: {
-      //   alias: "user",
-      //   leftJoinAndSelect: {
-      //     address: "user.address",
-      //     addresses: "user.addresses",
-      //   },
-      // },
-    });
-    // console.log(users, users.map(u => u.addresses));
-    return new UserEntity();
+  @UseGuards(GraphqlAuthGuard)
+  async me(@CurrentUser() user: UserEntity): Promise<UserEntity> {
+    return user;
+  }
+
+  @Query(() => UserEntity)
+  public async login(
+    @Context() ctx: { res: Response },
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ) {
+    const { token, user } = await this.authService.login(email, password);
+    ctx.res.cookie('token', token, { expires: new Date(Date.now() + time), path: '/' });
+    return user;
+  }
+
+  @Mutation(() => Boolean)
+  @UseGuards(GraphqlAuthGuard)
+  public async logout(@Context() ctx: { res: Response }) {
+    ctx.res.cookie('token', '', { expires: new Date(Date.now() - time), path: '/' });
+  }
+
+  @Mutation(() => Boolean)
+  public async registration(
+    @Context() ctx: { res: Response },
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ) {
+    throw new Error('The regisration is not working now');
   }
 }

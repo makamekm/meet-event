@@ -5,7 +5,7 @@
       <div class="content">
         <p class="on-appear-scale-left on-delay-1">
           <strong>Username:</strong>
-          {{ loggedInUser.username }}
+          {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
         </p>
         <p class="on-appear-scale-left on-delay-2">
           <strong>Email:</strong>

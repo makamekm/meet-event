@@ -13,17 +13,8 @@ export class AuthService {
     @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  getPassword(password: string) {
+  getPasswordHash(password: string) {
     return crypto.createHash('md5').update(password).digest('hex');
-  }
-
-  getDevUser(email: string) {
-    const user = new UserEntity();
-    user.id = 0;
-    user.email = email;
-    user.first_name = 'Local';
-    user.last_name = 'Developer';
-    return user;
   }
 
   async login(email: string, password: string): Promise<{
@@ -31,28 +22,12 @@ export class AuthService {
     user: UserEntity;
     serialized_user: IUserPayroll;
   }> {
-    let user: UserEntity;
-    if (process.env.NODE_ENV === 'production') {
-      user = await this.userRepository.findOne({
-        where: {
-          email,
-          password: this.getPassword(password),
-        },
-      });
-    } else {
-      if (!email || !!password) {
-        user = await this.userRepository.findOne({
-          where: {
-            email,
-            password: this.getPassword(password),
-          },
-        });
-        if (!user) {
-          throw new BadRequestException('Email & password (should be empty for dev) are miss match');
-        }
-      }
-      user = this.getDevUser(email);
-    }
+    const user = await this.userRepository.findOne({
+      where: {
+        email,
+        password: this.getPasswordHash(password),
+      },
+    });
     if (!user) {
       throw new BadRequestException('Email & password are miss match');
     }
@@ -85,12 +60,7 @@ export class AuthService {
   }
 
   async validate(payroll: IUserPayroll): Promise<UserEntity> {
-    let user: UserEntity;
-    if (process.env.NODE_ENV === 'production') {
-      user = await this.userRepository.findOne(payroll.id);
-    } else {
-      user = this.getDevUser(payroll.email);
-    }
+    const user = await this.userRepository.findOne(payroll.id);
     return user;
   }
 }

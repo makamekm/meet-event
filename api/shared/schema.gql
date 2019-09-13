@@ -92,6 +92,11 @@ type EventUserEntity {
   updated_at: DateTime
 }
 
+type Mutation {
+  logout: Boolean!
+  registration(password: String!, email: String!): Boolean!
+}
+
 type NotificationEntity {
   id: Int!
   short_message: String!
@@ -103,6 +108,7 @@ type NotificationEntity {
 
 type Query {
   me: UserEntity!
+  login(password: String!, email: String!): UserEntity!
 }
 
 type ScoreEntity {

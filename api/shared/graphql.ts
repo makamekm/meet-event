@@ -37,6 +37,7 @@ export interface CardEntity {
 export interface CommentEntity {
     id: number;
     comments: CommentEntity[];
+    comment_count: number;
     parent: CommentEntity[];
     event: EventEntity;
     author: UserEntity;
@@ -106,6 +107,7 @@ export interface NotificationEntity {
 export interface IQuery {
     me(): UserEntity | Promise<UserEntity>;
     login(password: string, email: string): UserEntity | Promise<UserEntity>;
+    comments(event: number, skip: number, limit: number): JSONObject[] | Promise<JSONObject[]>;
 }
 
 export interface ScoreEntity {
@@ -141,3 +143,4 @@ export interface UserEntity {
 }
 
 export type DateTime = any;
+export type JSONObject = any;

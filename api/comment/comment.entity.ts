@@ -16,6 +16,11 @@ export class CommentEntity implements ICommentModel {
   @TreeChildren()
   comments: CommentEntity[];
 
+  @Field(() => Int)
+  get comment_count() {
+    return this.comments.length;
+  }
+
   @Field(() => [CommentEntity])
   @TreeParent()
   parent?: CommentEntity;

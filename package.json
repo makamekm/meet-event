@@ -83,7 +83,8 @@
     "portal-vue": "2.1.6",
     "vue-dom-portal": "0.1.6",
     "sifter": "0.5.3",
-    "nuxt-vuex-localstorage": "1.2.6"
+    "nuxt-vuex-localstorage": "1.2.6",
+    "graphql-type-json": "0.3.0"
   },
   "devDependencies": {
     "@types/supertest": "2.0.8",

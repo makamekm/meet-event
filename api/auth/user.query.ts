@@ -34,6 +34,7 @@ export class UserQuery {
   @UseGuards(GraphqlAuthGuard)
   public async logout(@Context() ctx: { res: Response }) {
     ctx.res.cookie('token', '', { expires: new Date(Date.now() - time), path: '/' });
+    return true;
   }
 
   @Mutation(() => Boolean)
